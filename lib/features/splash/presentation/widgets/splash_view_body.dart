@@ -1,4 +1,5 @@
 // Edited: turned into a stateful animated splash that scales then fades out, then navigates to HomeView
+import 'package:bookly/constants.dart';
 import 'package:bookly/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,11 +31,17 @@ class _SplashViewBodyState extends State<SplashViewBody>
     // Scale: start small -> bigger -> settle
     _scaleAnimation = TweenSequence<double>([
       TweenSequenceItem<double>(
-        tween: Tween(begin: 0.6, end: 1.2).chain(CurveTween(curve: Curves.easeOut)),
+        tween: Tween(
+          begin: 0.6,
+          end: 1.2,
+        ).chain(CurveTween(curve: Curves.easeOut)),
         weight: 66,
       ),
       TweenSequenceItem<double>(
-        tween: Tween(begin: 1.2, end: 1.0).chain(CurveTween(curve: Curves.easeInOut)),
+        tween: Tween(
+          begin: 1.2,
+          end: 1.0,
+        ).chain(CurveTween(curve: Curves.easeInOut)),
         weight: 34,
       ),
     ]).animate(_controller);
@@ -51,7 +58,13 @@ class _SplashViewBodyState extends State<SplashViewBody>
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         // use microtask to avoid setState during build
-        Future.microtask(() => Get.off(() => const HomeView()));
+        Future.microtask(
+          () => Get.off(
+            () => const HomeView(),
+            transition: Transition.fadeIn,
+            duration: kTransitonDuration,
+          ),
+        );
       }
     });
   }
