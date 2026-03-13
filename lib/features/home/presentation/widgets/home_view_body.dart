@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../core/utils/styles.dart';
 import 'custom_app_bar.dart';
 import 'package:gap/gap.dart';
 
@@ -11,7 +12,14 @@ class HomeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [CustomAppBar(), Gap(20), FeaturedBookHorizontalListView()],
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomAppBar(),
+        Gap(20),
+        FeaturedBookHorizontalListView(),
+        Gap(30),
+        Text('Best Seller', style: Styles.textStyle20),
+      ],
     );
   }
 }

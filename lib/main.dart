@@ -2,10 +2,11 @@ import 'package:bookly/constants.dart';
 import 'package:bookly/features/splash/presentation/view/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp( Bookly());
+  runApp(Bookly());
 }
 
 class Bookly extends StatelessWidget {
@@ -13,12 +14,21 @@ class Bookly extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor:kPrimaryColor,
-      ),
-      home: SplashView(),
-    );
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true, // عشان الخط يتناسب مع كل الشاشات
+      splitScreenMode:
+          true, // عشان لو الشاشة كبيرة (زي التابلت) يوزع المحتوى بشكل أفضل
+      builder: (context, child) {
+        return GetMaterialApp(
+          theme: ThemeData.dark().copyWith(
+            scaffoldBackgroundColor: kPrimaryColor,
+            textTheme: GoogleFonts.montserratTextTheme(ThemeData.dark().textTheme)
+          ),
 
+          home: const SplashView(),
+        );
+      },
+    );
   }
 }
