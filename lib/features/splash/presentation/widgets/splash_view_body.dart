@@ -1,9 +1,9 @@
 // Edited: turned into a stateful animated splash that scales then fades out, then navigates to HomeView
 import 'package:bookly/constants.dart';
+import 'package:bookly/core/utils/app_router.dart';
 import 'package:bookly/core/utils/assets.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../../home/presentation/view/home_view.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -58,15 +58,12 @@ class _SplashViewBodyState extends State<SplashViewBody>
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         // use microtask to avoid setState during build
-        Future.microtask(
-          () => Get.off(
-            () => const HomeView(),
-            transition: Transition.fadeIn,
-            duration: kTransitonDuration,
-          ),
-        );
+        Future.microtask(() {
+          context.go(AppRouter.home);
+        });
       }
     });
+
   }
 
   @override
