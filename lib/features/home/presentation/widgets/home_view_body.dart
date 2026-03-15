@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../../constants.dart';
-import '../../../../core/utils/assets.dart';
 import '../../../../core/utils/styles.dart';
-import 'best_seller_list_view_item.dart';
 import 'best_seller_vertical_list_view.dart';
 import 'custom_app_bar.dart';
 import 'package:gap/gap.dart';

@@ -4,8 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../constants.dart';
 import '../../../../core/utils/app_router.dart';
-import '../../../../core/utils/assets.dart';
 import '../../../../core/utils/styles.dart';
+import '../../../../generated/assets.dart';
 import 'book_rating.dart';
 
 class BestSellerListViewItem extends StatelessWidget {
@@ -30,7 +30,7 @@ class BestSellerListViewItem extends StatelessWidget {
                   color: Colors.blue,
                   borderRadius: BorderRadius.circular(8),
                   image: DecorationImage(
-                    image: AssetImage(AssetsData.soloLevelingImage),
+                    image: AssetImage(Assets.images.soloLeveling.path),
                     fit: BoxFit.fill,
                   ),
                 ),

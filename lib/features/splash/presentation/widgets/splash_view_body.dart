@@ -1,9 +1,8 @@
-// Edited: turned into a stateful animated splash that scales then fades out, then navigates to HomeView
-import 'package:bookly/constants.dart';
 import 'package:bookly/core/utils/app_router.dart';
-import 'package:bookly/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../generated/assets.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -63,7 +62,6 @@ class _SplashViewBodyState extends State<SplashViewBody>
         });
       }
     });
-
   }
 
   @override
@@ -82,7 +80,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
           child: ScaleTransition(
             scale: _scaleAnimation,
             child: Image.asset(
-              AssetsData.logo,
+              Assets.images.logo.path,
               width: 180,
               height: 180,
               fit: BoxFit.contain,
