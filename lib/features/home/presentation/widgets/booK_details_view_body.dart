@@ -13,46 +13,51 @@ class BookDetailsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomBookDetailsAppBar(),
-        Gap(20),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 80.w),
-          child: CustomBookImageItem(),
-        ),
-        Gap(20),
-        Text('Solo Leveling Anime ', style: Styles.textStyle30),
-        Gap(5),
-        Text(
-          'Abanoub Habib ',
-          style: Styles.textStyle18.copyWith(
-            color: Colors.grey,
-            fontStyle: FontStyle.italic,
-            fontWeight: FontWeight.w500,
+    return CustomScrollView(
+      slivers: [
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child: Column(
+            children: [
+              CustomBookDetailsAppBar(),
+              Gap(20),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 80.w),
+                child: CustomBookImageItem(),
+              ),
+              Gap(20),
+              Text('Solo Leveling Anime ', style: Styles.textStyle30),
+              Gap(5),
+              Text(
+                'Abanoub Habib ',
+                style: Styles.textStyle18.copyWith(
+                  color: Colors.grey,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Gap(10),
+              BookRating(mainAxisAlignment: MainAxisAlignment.center),
+              Gap(45),
+              BookAction(),
+              Expanded(child: Gap(40)),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'You can also like',
+                  style: Styles.textStyle14.copyWith(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ),
+              Gap(30.h),
+              SimilarBooksListView(),
+              Gap(41.h),
+            ],
           ),
         ),
-        Gap(10),
-        BookRating(
-          mainAxisAlignment: MainAxisAlignment.center,
-        ),
-        Gap(35),
-        BookAction(),
-        Gap(40),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text('You can also like', style: Styles.textStyle14.copyWith(
-            fontWeight: FontWeight.w600,
-            fontSize: 16.sp,
-          )),
-        ),
-        Gap(30),
-        SimilarBooksListView(),
-        Gap(30),
       ],
     );
   }
 }
-
-
-
