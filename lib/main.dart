@@ -20,6 +20,7 @@ class Bookly extends StatelessWidget {
           true, // عشان لو الشاشة كبيرة (زي التابلت) يوزع المحتوى بشكل أفضل
       builder: (context, child) {
         return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           routerConfig: AppRouter.router,
           theme: ThemeData.dark().copyWith(
             scaffoldBackgroundColor: kPrimaryColor,

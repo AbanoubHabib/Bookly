@@ -15,7 +15,7 @@ class BestSellerListViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-       // context.push(AppRouter.bookDetails);
+        // context.push(AppRouter.bookDetails);
         GoRouter.of(context).push(AppRouter.bookDetails);
       },
       child: SizedBox(
@@ -47,7 +47,9 @@ class BestSellerListViewItem extends StatelessWidget {
                     'Abanoub Habib Flutter Developer',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: Styles.textStyle20.copyWith(fontFamily: kGTSectraFine),
+                    style: Styles.textStyle20.copyWith(
+                      fontFamily: kGTSectraFine,
+                    ),
                   ),
                 ),
                 const Gap(3),
@@ -62,20 +64,19 @@ class BestSellerListViewItem extends StatelessWidget {
                 const Gap(3),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      
+
                   children: [
                     Text(
-                      '19,99💲',
+                      '19,99 €',
                       overflow: TextOverflow.ellipsis,
                       style: Styles.textStyle20.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Gap(36.sp),
+                    Gap(36.w),
                     BookRating(),
                   ],
                 ),
-      
               ],
             ),
           ],
