@@ -16,9 +16,10 @@ class SearchViewBody extends StatelessWidget {
         Gap(15.h),
         CustomSearchTextField(),
         Gap(15.h),
-        Text('Search Results', style: Styles.textStyle20.copyWith(
-          fontWeight: FontWeight.bold,
-        )),
+        Text(
+          'Search Results',
+          style: Styles.textStyle20.copyWith(fontWeight: FontWeight.bold),
+        ),
         Gap(5),
         Expanded(child: SearchResultVerticalListView()),
       ],

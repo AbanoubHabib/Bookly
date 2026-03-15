@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import '../../../../core/utils/styles.dart';import 'book_action_two_button.dart';
+import '../../../../core/utils/styles.dart';
+import 'book_action_two_button.dart';
 import 'book_rating.dart';
 import 'custom_book_image_item.dart';
 

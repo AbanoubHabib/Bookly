@@ -13,22 +13,13 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: splash,
     routes: [
-      GoRoute(
-        path: splash,
-        builder: (context, state) => const SplashView(),
-      ),
-      GoRoute(
-        path: home,
-        builder: (context, state) => const HomeView(),
-      ),
+      GoRoute(path: splash, builder: (context, state) => const SplashView()),
+      GoRoute(path: home, builder: (context, state) => const HomeView()),
       GoRoute(
         path: bookDetails,
         builder: (context, state) => const BookDetailsView(),
       ),
-      GoRoute(
-        path: search,
-        builder: (context, state) => const SearchView(),
-      ),
+      GoRoute(path: search, builder: (context, state) => const SearchView()),
     ],
   );
 }

@@ -10,7 +10,7 @@ class CustomSearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-     // autofocus: true,
+      // autofocus: true,
       decoration: InputDecoration(
         enabledBorder: buildOutlineInputBorder(),
         focusedBorder: buildOutlineInputBorder(),
@@ -29,10 +29,7 @@ class CustomSearchTextField extends StatelessWidget {
             ),
           ),
         ),
-        contentPadding: EdgeInsets.symmetric(
-          horizontal: 20.w,
-          vertical: 16.h,
-        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
       ),
     );
   }
@@ -40,9 +37,7 @@ class CustomSearchTextField extends StatelessWidget {
   OutlineInputBorder buildOutlineInputBorder() {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(12.r),
-      borderSide: const BorderSide(
-        color: Colors.white,
-      ),
+      borderSide: const BorderSide(color: Colors.white),
     );
   }
 }

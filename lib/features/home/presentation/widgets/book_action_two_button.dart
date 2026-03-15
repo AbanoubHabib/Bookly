@@ -9,9 +9,8 @@ class BookAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 16.0.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.0.w),
       child: Row(
-
         children: [
           Expanded(
             child: CustomButton(

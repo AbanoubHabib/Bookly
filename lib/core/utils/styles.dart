@@ -13,7 +13,6 @@ abstract class Styles {
   static TextStyle textStyle20 = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeight.normal, // normal == regular
-
   );
   static TextStyle textStyle30 = TextStyle(
     fontSize: 30.sp,

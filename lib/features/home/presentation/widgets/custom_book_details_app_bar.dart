@@ -7,9 +7,9 @@ class CustomBookDetailsAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        IconButton(onPressed: (){}, icon: Icon(Icons.close)),
+        IconButton(onPressed: () {}, icon: Icon(Icons.close)),
         const Spacer(),
-        IconButton(onPressed: (){}, icon: Icon(Icons.shopping_cart_outlined)),
+        IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart_outlined)),
       ],
     );
   }
