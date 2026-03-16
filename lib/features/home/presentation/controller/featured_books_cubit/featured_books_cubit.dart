@@ -1,0 +1,26 @@
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+
+import '../../../data/model/book_model/book_model.dart';
+import '../../../data/repos/home_repo.dart';
+
+part 'featured_books_state.dart';
+
+class FeaturedBooksCubit extends Cubit<FeaturedBooksState> {
+  FeaturedBooksCubit({required this.homeRepo}) : super(FeaturedBooksInitial());
+
+  // انا هنا بعمل instance من ال home repository عشان اقدر استخدمه في استدعاء ال methods
+  final HomeRepo homeRepo;
+
+  Future<void> fetchFeaturedBooks() async {
+    emit(FeaturedBooksLoading());
+
+    await Future.delayed(const Duration(seconds: 1));
+    var result = await homeRepo.fetchFeaturedBooks();
+    result.fold(
+      (failure) => emit(FeaturedBooksFailure(failure.errMessage)),
+      (books) => emit(FeaturedBooksSuccess(books)),
+    );
+  }
+}
