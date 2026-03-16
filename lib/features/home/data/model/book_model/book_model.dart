@@ -2,27 +2,38 @@ import 'package:equatable/equatable.dart';
 
 import 'item.dart';
 
-class BookModel extends Equatable {
-  final String? kind;
-  final int? totalItems;
-  final List<Item>? items;
+class BookModel {
+  final String id;
+  final String title;
+  final String? author;
+  final String imageUrl;
+  final String? previewLink; // رابط القراءة
+  final bool isFree; // هل الكتاب مجاني؟
 
-  const BookModel({this.kind, this.totalItems, this.items});
+  BookModel({
+    required this.id,
+    required this.title,
+    this.author,
+    required this.imageUrl,
+    this.previewLink,
+    this.isFree = false,
+  });
 
-  factory BookModel.fromJson(Map<String, dynamic> json) => BookModel(
-    kind: json['kind'] as String?,
-    totalItems: json['totalItems'] as int?,
-    items: (json['items'] as List<dynamic>?)
-        ?.map((e) => Item.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
+  factory BookModel.fromJson(Map<String, dynamic> json) {
+    // جوجل يضع البيانات الأساسية داخل volumeInfo
+    var volumeInfo = json['volumeInfo'];
+    // جوجل يضع بيانات الوصول (مجاني أم لا) داخل accessInfo
+    var accessInfo = json['accessInfo'];
 
-  Map<String, dynamic> toJson() => {
-    'kind': kind,
-    'totalItems': totalItems,
-    'items': items?.map((e) => e.toJson()).toList(),
-  };
-
-  @override
-  List<Object?> get props => [kind, totalItems, items];
+    return BookModel(
+      id: json['id'],
+      title: volumeInfo['title'] ?? 'No Title',
+      author: (volumeInfo['authors'] as List?)?.first ?? 'Unknown',
+      // جلب الصورة بدقة عالية وتأمين الرابط بـ https
+      imageUrl: (volumeInfo['imageLinks']?['thumbnail'] ?? '').replaceAll('http:', 'https:'),
+      previewLink: volumeInfo['previewLink'],
+      // التحقق إذا كان الكتاب متاحاً للقراءة مجاناً
+      isFree: accessInfo['viewability'] == 'ALL_PAGES' || accessInfo['viewability'] == 'PARTIAL',
+    );
+  }
 }
