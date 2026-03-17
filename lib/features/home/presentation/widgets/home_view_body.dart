@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/utils/styles.dart';
-import 'best_seller_vertical_list_view.dart';
+import 'newest_books_vertical_list_view.dart';
 import 'custom_app_bar.dart';
 import 'package:gap/gap.dart';
 
@@ -27,7 +27,7 @@ class HomeViewBody extends StatelessWidget {
             ],
           ),
         ),
-        BestSellerVerticalListView(),
+        NewestBooksVerticalListView(),
       ],
     );
   }

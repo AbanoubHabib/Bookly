@@ -42,7 +42,10 @@ class FeaturedBookHorizontalListView extends StatelessWidget {
           );
         } else if (state is FeaturedBooksFailure) {
           return CustomErrorWidget(
-              errMessage: state.errMessage, onPressed: () {});
+              errMessage: state.errMessage, onPressed: () {
+                // بنادي على الميثود اللي بتجيب الداتا تاني
+                BlocProvider.of<FeaturedBooksCubit>(context).fetchFeaturedBooks();
+          });
         } else {
           return BooksShimmerLoading(type: ShimmerType.featured);
         }

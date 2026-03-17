@@ -6,8 +6,8 @@ import '../../../../core/widgets/books_shimmer_loading.dart';
 import '../../../../core/widgets/custom_error_widget.dart';
 import 'book_list_view_item.dart';
 
-class BestSellerVerticalListView extends StatelessWidget {
-  const BestSellerVerticalListView({super.key});
+class NewestBooksVerticalListView extends StatelessWidget {
+  const NewestBooksVerticalListView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,10 @@ class BestSellerVerticalListView extends StatelessWidget {
           return SliverToBoxAdapter(
             child: CustomErrorWidget(
               errMessage: state.errMessage,
-              onPressed: () {},
+              onPressed: () {
+                // بنادي على الميثود اللي بتجيب الداتا تاني
+                BlocProvider.of<NewestBooksCubit>(context).fetchNewestBooks();
+              },
             ),
           );
         } else {
