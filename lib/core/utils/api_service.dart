@@ -12,6 +12,8 @@ class ApiService {
   Future<Map<String, dynamic>> get({required String endpoint}) async {
     // نقوم بإضافة المفتاح لكل رابط يطلبه الـ Repository
     var response = await _dio.get('$_baseUrl$endpoint&key=$_apiKey');
+   // print(response.data);
     return response.data;
+
   }
 }

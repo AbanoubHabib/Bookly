@@ -20,19 +20,18 @@ class BookModel {
   });
 
   factory BookModel.fromJson(Map<String, dynamic> json) {
-    // جوجل يضع البيانات الأساسية داخل volumeInfo
-    var volumeInfo = json['volumeInfo'];
-    // جوجل يضع بيانات الوصول (مجاني أم لا) داخل accessInfo
-    var accessInfo = json['accessInfo'];
+    var volumeInfo = json['volumeInfo'] ?? {}; // تأمين لو volumeInfo نل
+    var accessInfo = json['accessInfo'] ?? {};
 
     return BookModel(
-      id: json['id'],
+      id: json['id'] ?? '',
       title: volumeInfo['title'] ?? 'No Title',
       author: (volumeInfo['authors'] as List?)?.first ?? 'Unknown',
-      // جلب الصورة بدقة عالية وتأمين الرابط بـ https
-      imageUrl: (volumeInfo['imageLinks']?['thumbnail'] ?? '').replaceAll('http:', 'https:'),
+      // تعديل بسيط: استخدام replaceFirst لضمان الدقة وتوفير قيمة افتراضية واضحة
+      imageUrl: (volumeInfo['imageLinks']?['thumbnail'] ??
+          'https://www.freeiconspng.com/uploads/no-image-icon-11.png')
+          .replaceFirst('http:', 'https:'),
       previewLink: volumeInfo['previewLink'],
-      // التحقق إذا كان الكتاب متاحاً للقراءة مجاناً
       isFree: accessInfo['viewability'] == 'ALL_PAGES' || accessInfo['viewability'] == 'PARTIAL',
     );
   }

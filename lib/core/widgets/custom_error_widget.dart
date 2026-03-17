@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../utils/styles.dart';
+
+class CustomErrorWidget extends StatelessWidget {
+  final String errMessage;
+  final VoidCallback onPressed; // إضافة الـ Callback هنا لجعله عاماً
+
+  const CustomErrorWidget({
+    super.key,
+    required this.errMessage,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            errMessage,
+            style: Styles.textStyle18,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 10.h),
+          IconButton(
+            onPressed: onPressed, // تنفيذ الوظيفة الممررة
+            icon: const Icon(Icons.refresh, size: 30, color: Colors.white),
+          ),
+        ],
+      ),
+    );
+  }
+}

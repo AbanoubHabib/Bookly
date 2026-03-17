@@ -15,7 +15,9 @@ class BookDetailsSection extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 80.w),
-          child: CustomBookImageItem(),
+          child: CustomBookImageItem(
+            imageUrl: 'https://tse2.mm.bing.net/th/id/OIP.tiz9y9jJBk_pUmwWtYFUxgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
+          ),
         ),
         const Gap(20),
         Text('Solo Leveling Anime ', style: Styles.textStyle30),
