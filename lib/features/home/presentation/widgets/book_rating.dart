@@ -8,20 +8,27 @@ class BookRating extends StatelessWidget {
   const BookRating({
     super.key,
     this.mainAxisAlignment = MainAxisAlignment.start,
+    required this.rating, // لازم نمررهم هنا
+    required this.count,
   });
 
   final MainAxisAlignment mainAxisAlignment;
+  final num rating;
+  final int count;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: mainAxisAlignment,
       children: [
-        FaIcon(FontAwesomeIcons.solidStar, size: 18, color: Color(0xffFFDD4f)),
-        Gap(10),
-        Text('4.8', style: Styles.textStyle16),
-        Gap(5),
-        Text('(2679)', style: Styles.textStyle14.copyWith(color: Colors.grey)),
+        const FaIcon(FontAwesomeIcons.solidStar, size: 14, color: Color(0xffFFDD4f)),
+        const Gap(6),
+        Text(rating.toString(), style: Styles.textStyle16.copyWith(fontWeight: FontWeight.bold)),
+        const Gap(5),
+        Opacity(
+          opacity: 0.5,
+          child: Text('($count)', style: Styles.textStyle14.copyWith(fontWeight: FontWeight.w600)),
+        ),
       ],
     );
   }

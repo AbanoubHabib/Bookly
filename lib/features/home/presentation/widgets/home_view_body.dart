@@ -22,7 +22,7 @@ class HomeViewBody extends StatelessWidget {
               Gap(20),
               FeaturedBookHorizontalListView(),
               Gap(30),
-              Text('Best Seller', style: Styles.textStyle20),
+              Text('Newest Books ', style: Styles.textStyle20),
               Gap(10),
             ],
           ),

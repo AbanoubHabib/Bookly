@@ -1,16 +1,12 @@
-import 'package:equatable/equatable.dart';
-
 import 'image_links.dart';
 import 'industry_identifier.dart';
 import 'panelization_summary.dart';
 import 'reading_modes.dart';
 
-class VolumeInfo extends Equatable {
-  final String? title;
+class VolumeInfo {
+  final String title; // خليها final لأمان البيانات
   final List<String>? authors;
-  final String? publisher;
   final String? publishedDate;
-  final String? description;
   final List<IndustryIdentifier>? industryIdentifiers;
   final ReadingModes? readingModes;
   final int? pageCount;
@@ -20,18 +16,18 @@ class VolumeInfo extends Equatable {
   final bool? allowAnonLogging;
   final String? contentVersion;
   final PanelizationSummary? panelizationSummary;
-  final ImageLinks? imageLinks;
+  final ImageLinks? imageLinks; // شلنا الـ required عشان ميحصلش Crash
   final String? language;
   final String? previewLink;
   final String? infoLink;
   final String? canonicalVolumeLink;
+  final num? averageRating;
+  final int? ratingsCount;
 
-  const VolumeInfo({
-    this.title,
+  VolumeInfo({
+    required this.title,
     this.authors,
-    this.publisher,
     this.publishedDate,
-    this.description,
     this.industryIdentifiers,
     this.readingModes,
     this.pageCount,
@@ -46,14 +42,14 @@ class VolumeInfo extends Equatable {
     this.previewLink,
     this.infoLink,
     this.canonicalVolumeLink,
+    this.averageRating,
+    this.ratingsCount,
   });
 
   factory VolumeInfo.fromJson(Map<String, dynamic> json) => VolumeInfo(
-    title: json['title'] as String?,
-    authors: json['authors'] as List<String>?,
-    publisher: json['publisher'] as String?,
+    title: json['title'] as String? ?? 'No Title',
+    authors: (json['authors'] as List<dynamic>?)?.cast<String>(),
     publishedDate: json['publishedDate'] as String?,
-    description: json['description'] as String?,
     industryIdentifiers: (json['industryIdentifiers'] as List<dynamic>?)
         ?.map((e) => IndustryIdentifier.fromJson(e as Map<String, dynamic>))
         .toList(),
@@ -62,15 +58,15 @@ class VolumeInfo extends Equatable {
         : ReadingModes.fromJson(json['readingModes'] as Map<String, dynamic>),
     pageCount: json['pageCount'] as int?,
     printType: json['printType'] as String?,
-    categories: json['categories'] as List<String>?,
+    categories: (json['categories'] as List<dynamic>?)?.cast<String>(),
     maturityRating: json['maturityRating'] as String?,
     allowAnonLogging: json['allowAnonLogging'] as bool?,
     contentVersion: json['contentVersion'] as String?,
     panelizationSummary: json['panelizationSummary'] == null
         ? null
         : PanelizationSummary.fromJson(
-            json['panelizationSummary'] as Map<String, dynamic>,
-          ),
+      json['panelizationSummary'] as Map<String, dynamic>,
+    ),
     imageLinks: json['imageLinks'] == null
         ? null
         : ImageLinks.fromJson(json['imageLinks'] as Map<String, dynamic>),
@@ -78,14 +74,16 @@ class VolumeInfo extends Equatable {
     previewLink: json['previewLink'] as String?,
     infoLink: json['infoLink'] as String?,
     canonicalVolumeLink: json['canonicalVolumeLink'] as String?,
+
+    // تعديل الريتنج عشان ميعملش Error 👇
+    averageRating: json['averageRating'] as num? ?? 0,
+    ratingsCount: json['ratingsCount'] as int? ?? 0,
   );
 
   Map<String, dynamic> toJson() => {
     'title': title,
     'authors': authors,
-    'publisher': publisher,
     'publishedDate': publishedDate,
-    'description': description,
     'industryIdentifiers': industryIdentifiers?.map((e) => e.toJson()).toList(),
     'readingModes': readingModes?.toJson(),
     'pageCount': pageCount,
@@ -100,30 +98,7 @@ class VolumeInfo extends Equatable {
     'previewLink': previewLink,
     'infoLink': infoLink,
     'canonicalVolumeLink': canonicalVolumeLink,
+    'averageRating': averageRating,
+    'ratingsCount': ratingsCount,
   };
-
-  @override
-  List<Object?> get props {
-    return [
-      title,
-      authors,
-      publisher,
-      publishedDate,
-      description,
-      industryIdentifiers,
-      readingModes,
-      pageCount,
-      printType,
-      categories,
-      maturityRating,
-      allowAnonLogging,
-      contentVersion,
-      panelizationSummary,
-      imageLinks,
-      language,
-      previewLink,
-      infoLink,
-      canonicalVolumeLink,
-    ];
-  }
 }

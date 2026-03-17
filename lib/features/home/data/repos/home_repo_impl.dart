@@ -5,7 +5,6 @@ import '../../../../core/utils/api_service.dart';
 import 'home_repo.dart';
 import 'package:dio/dio.dart';
 
-
 //* هنا مجبر ينفذ الفيتشرز الموجوده فى HomeRepo
 class HomeRepoImpl implements HomeRepo {
   final ApiService apiService;
@@ -17,7 +16,8 @@ class HomeRepoImpl implements HomeRepo {
     try {
       // الـ endpoint هنا يبحث عن كتب Flutter مع فلتر للمعاينة المجانية
       var data = await apiService.get(
-          endpoint: 'volumes?Filtering=free-ebooks&q=subject:Programming');
+        endpoint: 'volumes?Filtering=free-ebooks&q=subject:Programming',
+      );
 
       List<BookModel> books = [];
       for (var item in data['items']) {
@@ -38,7 +38,9 @@ class HomeRepoImpl implements HomeRepo {
     try {
       // الـ endpoint هنا يبحث عن أحدث كتب Flutter المرتبة زمنياً
       var data = await apiService.get(
-          endpoint: 'volumes?Filtering=free-ebooks&Sorting=newest&q=computer science');
+        endpoint:
+            'volumes?Filtering=free-ebooks&Sorting=newest&q=computer science',
+      );
 
       List<BookModel> books = [];
       for (var item in data['items']) {
@@ -55,11 +57,15 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<BookModel>>> fetchSimilarBooks({required String category}) async {
+  Future<Either<Failure, List<BookModel>>> fetchSimilarBooks({
+    required String category,
+  }) async {
     try {
       // هنا بنبحث عن كتب مشابهة بناءً على التصنيف (Category) وبترتيب الأهمية
       var data = await apiService.get(
-          endpoint: 'volumes?Filtering=free-ebooks&Sorting=relevance&q=subject:$category');
+        endpoint:
+            'volumes?Filtering=free-ebooks&Sorting=relevance&q=subject:$category',
+      );
 
       List<BookModel> books = [];
       for (var item in data['items']) {
