@@ -27,7 +27,7 @@ class HomeViewBody extends StatelessWidget {
             ],
           ),
         ),
-        SliverFillRemaining(child: BestSellerVerticalListView()),
+        BestSellerVerticalListView(),
       ],
     );
   }

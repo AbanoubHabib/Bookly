@@ -16,7 +16,8 @@ class BookDetailsSection extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 80.w),
           child: CustomBookImageItem(
-            imageUrl: 'https://tse2.mm.bing.net/th/id/OIP.tiz9y9jJBk_pUmwWtYFUxgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
+            imageUrl:
+                'https://tse2.mm.bing.net/th/id/OIP.tiz9y9jJBk_pUmwWtYFUxgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
           ),
         ),
         const Gap(20),
@@ -31,7 +32,10 @@ class BookDetailsSection extends StatelessWidget {
           ),
         ),
         const Gap(10),
-        BookRating(mainAxisAlignment: MainAxisAlignment.center),
+        BookRating(
+          mainAxisAlignment: MainAxisAlignment.center,
+
+        ),
         const Gap(45),
         const BookAction(),
       ],

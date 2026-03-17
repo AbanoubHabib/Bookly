@@ -1,7 +1,12 @@
+import 'package:bookly/features/home/presentation/controller/newest_books_cubit/newest_books_cubit.dart';
+import 'package:bookly/features/home/presentation/controller/newest_books_cubit/newest_books_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import '../../../../core/utils/styles.dart';
+import '../../../../core/widgets/books_shimmer_loading.dart';
+import '../../../../core/widgets/custom_error_widget.dart';
 import '../../../home/presentation/widgets/book_list_view_item.dart';
 import 'custom_search_text_field.dart';
 
@@ -32,14 +37,27 @@ class SearchResultVerticalListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.zero,
-      itemCount: 5,
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: BookListViewItem(),
-        );
+    return BlocBuilder<NewestBooksCubit, NewestBooksState>(
+      builder: (context, state) {
+
+        if (state is NewestBooksSuccess) {
+          return ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: state.books.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: BookListViewItem(
+                          bookModel: state.books[index],
+                        ),
+                      );
+                    },
+                  );
+        }else if (state is NewestBooksFailure) {
+          return CustomErrorWidget(errMessage: state.errMessage, onPressed: () {});
+        } else {
+          return BooksShimmerLoading(type:  ShimmerType.newest);
+        }
       },
     );
   }
