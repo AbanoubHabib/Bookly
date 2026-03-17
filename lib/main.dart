@@ -1,5 +1,6 @@
 import 'package:bookly/constants.dart';
 import 'package:bookly/core/utils/app_router.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +14,12 @@ import 'features/home/presentation/controller/newest_books_cubit/newest_books_cu
 void main() {
   setupServiceLocator();
   // تهيئة الـ GetIt قبل تشغيل التطبيق و لازم نناديها قبل الـ runApp
-  runApp(Bookly());
+  runApp(
+    DevicePreview(
+      enabled: !const bool.fromEnvironment('dart.vm.product'),
+      builder: (context) => const Bookly(),
+    ),
+  );
 }
 
 class Bookly extends StatelessWidget {
@@ -38,13 +44,13 @@ class Bookly extends StatelessWidget {
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
-        minTextAdapt: true, // عشان الخط يتناسب مع كل الشاشات
-        splitScreenMode:
-            true, // عشان لو الشاشة كبيرة (زي التابلت) يوزع المحتوى بشكل أفضل
+        minTextAdapt: true,               // دي بتخلي الخطوط متصغرش أوي في الشاشات الصغيرة
+        splitScreenMode: true,
         builder: (context, child) {
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
             routerConfig: AppRouter.router,
+            builder: DevicePreview.appBuilder,
             theme: ThemeData.dark().copyWith(
               scaffoldBackgroundColor: kPrimaryColor,
               textTheme: GoogleFonts.montserratTextTheme(

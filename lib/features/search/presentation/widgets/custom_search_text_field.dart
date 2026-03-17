@@ -24,12 +24,12 @@ class CustomSearchTextField extends StatelessWidget {
             opacity: 0.7,
             child: FaIcon(
               FontAwesomeIcons.magnifyingGlass,
-              size: 22.sp,
+              size: 22.h,
               color: Colors.white,
             ),
           ),
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+        contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 16.h),
       ),
     );
   }
