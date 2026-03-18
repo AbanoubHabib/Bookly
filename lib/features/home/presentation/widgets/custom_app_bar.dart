@@ -10,12 +10,15 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // هنجيب اللون المناسب للثيم الحالي (أبيض في الدارك وأسود في اللايت)
+    final Color themeColor = Theme.of(context).colorScheme.onSurface;
+
     return Padding(
       padding: const EdgeInsets.only(top: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(Assets.images.logo.path, height: 30),
+          Image.asset(Assets.images.logo.path, height: 30, color: themeColor),
           IconButton(
             onPressed: () {
               GoRouter.of(context).push(AppRouter.search);
@@ -23,7 +26,7 @@ class CustomAppBar extends StatelessWidget {
             icon: FaIcon(
               FontAwesomeIcons.magnifyingGlass,
               size: 25,
-              color: Colors.white,
+              color: themeColor,
             ),
           ),
         ],

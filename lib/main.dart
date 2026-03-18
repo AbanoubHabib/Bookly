@@ -1,19 +1,29 @@
-import 'package:bookly/constants.dart';
 import 'package:bookly/core/utils/app_router.dart';
+import 'package:bookly/core/utils/app_themes.dart'; // تأكد من استيراد ملف الثيمات
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
-
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
+import 'core/manager/theme_cubit.dart';
 import 'core/utils/service_locator.dart';
 import 'features/home/data/repos/home_repo_impl.dart';
 import 'features/home/presentation/controller/featured_books_cubit/featured_books_cubit.dart';
 import 'features/home/presentation/controller/newest_books_cubit/newest_books_cubit.dart';
 
-void main() {
+void main() async {
+  // دي لازم تكون أول سطر طالما فيه await في الـ main
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // تهيئة الـ GetIt
   setupServiceLocator();
-  // تهيئة الـ GetIt قبل تشغيل التطبيق و لازم نناديها قبل الـ runApp
+
+  // تهيئة الـ Hydrated Storage لحفظ حالة الثيم (Light/Dark)
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: HydratedStorageDirectory((await getApplicationDocumentsDirectory()).path),
+  );
+
   runApp(
     DevicePreview(
       enabled: !const bool.fromEnvironment('dart.vm.product'),
@@ -29,34 +39,40 @@ class Bookly extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        // توفير الـ ThemeCubit على مستوى التطبيق بالكامل
+        BlocProvider(create: (context) => ThemeCubit()),
+
         BlocProvider(
           create: (context) => FeaturedBooksCubit(
-            homeRepo: getIt
-                .get<HomeRepoImpl>(),
-          )..fetchFeaturedBooks(),//! .. mean after init FeaturedBooksCubit call fetchFeaturedBooks
+            homeRepo: getIt.get<HomeRepoImpl>(),
+          )..fetchFeaturedBooks(),
         ),
         BlocProvider(
           create: (context) => NewestBooksCubit(
-            homeRepo: getIt
-                .get<HomeRepoImpl>(),
+            homeRepo: getIt.get<HomeRepoImpl>(),
           )..fetchNewestBooks(),
         ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
-        minTextAdapt: true,               // دي بتخلي الخطوط متصغرش أوي في الشاشات الصغيرة
+        minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            routerConfig: AppRouter.router,
-            builder: DevicePreview.appBuilder,
-            theme: ThemeData.dark().copyWith(
-              scaffoldBackgroundColor: kPrimaryColor,
-              textTheme: GoogleFonts.montserratTextTheme(
-                ThemeData.dark().textTheme,
-              ),
-            ),
+          // التعديل المهم هنا: نراقب الـ ThemeMode
+          return BlocBuilder<ThemeCubit, ThemeMode>(
+            builder: (context, themeMode) {
+              return MaterialApp.router(
+                debugShowCheckedModeBanner: false,
+                locale: DevicePreview.locale(context),
+                builder: DevicePreview.appBuilder,
+                routerConfig: AppRouter.router,
+
+                // ربط الثيمات من ملف AppThemes
+                themeMode: themeMode,
+                theme: AppThemes.lightTheme,
+                darkTheme: AppThemes.darkTheme,
+              );
+            },
           );
         },
       ),

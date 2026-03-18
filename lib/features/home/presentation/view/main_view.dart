@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:bookly/features/home/presentation/view/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,7 +31,7 @@ class _MainViewState extends State<MainView> {
       create: (context) => SearchBooksCubit(getIt.get<SearchRepoImpl>()),
       child: const SearchView(),
     ),
-    const Center(child: Text('Profile Screen')),
+    const ProfileView(),
   ];
 
   @override
