@@ -58,7 +58,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       if (status == AnimationStatus.completed) {
         // use microtask to avoid setState during build
         Future.microtask(() {
-          context.go(AppRouter.home);
+          context.go(AppRouter.mainView);
         });
       }
     });

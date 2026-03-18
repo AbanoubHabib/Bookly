@@ -10,33 +10,47 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/home/data/model/book_model/book_model.dart';
+import '../../features/home/presentation/view/main_view.dart';
 import '../../features/search/data/repo/search_repo_impl.dart';
 
 class AppRouter {
-  static const String splash = '/splash';
-  static const String home = '/home';
+  static const String splash = '/'; // خلي الـ Splash هي نقطة البداية الحقيقية
+  static const String mainView = '/mainView'; // ده المسار الجديد اللي فيه الـ Nav Bar
   static const String bookDetails = '/bookDetails';
   static const String search = '/search';
 
   static final GoRouter router = GoRouter(
     initialLocation: splash,
     routes: [
-      GoRoute(path: splash, builder: (context, state) => const SplashView()),
-      GoRoute(path: home, builder: (context, state) => const HomeView()),
+      // 1. شاشة الـ Splash
+      GoRoute(
+          path: splash,
+          builder: (context, state) => const SplashView()
+      ),
+
+      // 2. الشاشة الرئيسية (اللي شايلة الـ Home والفيفوريت والبروفايل)
+      GoRoute(
+          path: mainView,
+          builder: (context, state) => const MainView()
+      ),
+
+      // 3. شاشة التفاصيل
       GoRoute(
         path: bookDetails,
-        builder: (context, state) =>
-            BlocProvider(
-              create: (context) =>
-                  SimilarBooksCubit(homeRepo: getIt.get<HomeRepoImpl>()),
-              child: BookDetailsView(bookModel: state.extra as BookModel),
-            ),
+        builder: (context, state) => BlocProvider(
+          create: (context) => SimilarBooksCubit(homeRepo: getIt.get<HomeRepoImpl>()),
+          child: BookDetailsView(bookModel: state.extra as BookModel),
+        ),
       ),
-      GoRoute(path: search, builder: (context, state) =>
-          BlocProvider(
-            create: (context) => SearchBooksCubit(getIt.get<SearchRepoImpl>()),
-            child: SearchView(),
-          )),
+
+      // 4. شاشة السيرش
+      GoRoute(
+        path: search,
+        builder: (context, state) => BlocProvider(
+          create: (context) => SearchBooksCubit(getIt.get<SearchRepoImpl>()),
+          child: const SearchView(),
+        ),
+      ),
     ],
   );
 }
