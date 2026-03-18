@@ -12,12 +12,12 @@ class $AssetsImagesGen {
   const $AssetsImagesGen();
 
   final AssetGenImage logo = const AssetGenImage('assets/images/Logo.png');
-  final AssetGenImage soloLeveling = const AssetGenImage(
-    'assets/images/SoloLeveling.jpg',
-  );
-  final AssetGenImage testImage = const AssetGenImage(
-    'assets/images/test_image.png',
-  );
+  final AssetGenImage soloLeveling =
+      const AssetGenImage('assets/images/SoloLeveling.jpg');
+  final AssetGenImage booklogoPng =
+      const AssetGenImage('assets/images/booklogo.png');
+  final AssetGenImage testImage =
+      const AssetGenImage('assets/images/test_image.png');
 }
 
 class AssetGenImage {
@@ -81,8 +81,15 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider({AssetBundle? bundle, String? package}) {
-    return AssetImage(_assetName, bundle: bundle, package: package);
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
   }
 
   Widget custom({
