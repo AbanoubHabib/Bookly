@@ -45,10 +45,10 @@ class BookDetailsSection extends StatelessWidget {
         ),
         const Gap(10),
         bookModel.rating > 0
-            ? BookRating(rating: bookModel.rating, count: bookModel.ratingCount)
-            : const Text(
+            ? BookRating(rating: bookModel.rating, count: bookModel.ratingCount,mainAxisAlignment: MainAxisAlignment.center,)
+            :  Text(
                 'No ratings yet',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
+                style: TextStyle(fontSize: 15, color: Colors.red.shade400,fontWeight: FontWeight.w700,fontStyle: FontStyle.italic),
               ),
         const Gap(45),
         BookAction(bookModel: bookModel),

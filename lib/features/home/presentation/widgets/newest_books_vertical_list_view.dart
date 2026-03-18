@@ -19,7 +19,7 @@ class NewestBooksVerticalListView extends StatelessWidget {
             itemCount: state.books.length,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 3),
                 child: BookListViewItem(bookModel: state.books[index]),
               );
             },
