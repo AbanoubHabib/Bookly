@@ -40,7 +40,7 @@ class BookListViewItem extends StatelessWidget {
                     bookModel.title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: Styles.textStyle20.copyWith(
+                    style: Styles.textStyle18.copyWith(
                       fontFamily: kGTSectraFine,
                     ),
                   ),

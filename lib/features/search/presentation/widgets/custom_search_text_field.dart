@@ -1,8 +1,10 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../../../../core/utils/styles.dart';
+import '../controller/search_books_cubit/search_books_cubit.dart';
 
 class CustomSearchTextField extends StatelessWidget {
   const CustomSearchTextField({super.key});
@@ -10,10 +12,19 @@ class CustomSearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      // autofocus: true,
+      onChanged: (value) {
+        EasyDebounce.debounce(
+          'search-debouncer',
+          const Duration(milliseconds: 500),
+          () {
+            BlocProvider.of<SearchBooksCubit>(
+              context,
+            ).fetchSearchBooks(bookName: value);
+          },
+        );
+      },
+
       decoration: InputDecoration(
-        enabledBorder: buildOutlineInputBorder(),
-        focusedBorder: buildOutlineInputBorder(),
         hintText: 'Search for books...',
         hintStyle: Styles.textStyle14.copyWith(
           color: Colors.grey.withValues(alpha: 0.7),
@@ -29,15 +40,15 @@ class CustomSearchTextField extends StatelessWidget {
             ),
           ),
         ),
+        enabledBorder: buildOutlineInputBorder(),
+        focusedBorder: buildOutlineInputBorder(),
         contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 16.h),
       ),
     );
   }
 
-  OutlineInputBorder buildOutlineInputBorder() {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12.r),
-      borderSide: const BorderSide(color: Colors.white),
-    );
-  }
+  OutlineInputBorder buildOutlineInputBorder() => OutlineInputBorder(
+    borderSide: const BorderSide(color: Colors.white),
+    borderRadius: BorderRadius.circular(12),
+  );
 }
