@@ -1,16 +1,35 @@
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 
-class BookModel extends Equatable {
+part 'book_model.g.dart';
+
+@HiveType(typeId: 0)
+class BookModel extends HiveObject with EquatableMixin {
+  @HiveField(0)
   final String id;
-  final String title;
-  final String? author;
-  final String imageUrl;
-  final String? previewLink; // رابط القراءة
-  final bool isFree; // هل الكتاب مجاني؟
-  final num rating; // التقييم
-  final int ratingCount; // عدد المقيّمين
 
-  const BookModel({
+  @HiveField(1)
+  final String title;
+
+  @HiveField(2)
+  final String? author;
+
+  @HiveField(3)
+  final String imageUrl;
+
+  @HiveField(4)
+  final String? previewLink;
+
+  @HiveField(5)
+  final bool isFree;
+
+  @HiveField(6)
+  final num rating;
+
+  @HiveField(7)
+  final int ratingCount;
+
+  BookModel({
     required this.id,
     required this.title,
     this.author,
@@ -28,17 +47,13 @@ class BookModel extends Equatable {
     return BookModel(
       id: json['id'] ?? '',
       title: volumeInfo['title'] ?? 'No Title',
-      // بناخد أول مؤلف بس ولو مفيش بنكتب Unknown
       author: (volumeInfo['authors'] as List?)?.first ?? 'Unknown',
-      // بنجيب الصورة ونحولها لـ https عشان تشتغل على الموبايل
       imageUrl: (volumeInfo['imageLinks']?['thumbnail'] ??
           'https://www.freeiconspng.com/uploads/no-image-icon-11.png')
           .replaceFirst('http:', 'https:'),
       previewLink: volumeInfo['previewLink'],
       isFree: accessInfo['viewability'] == 'ALL_PAGES' ||
           accessInfo['viewability'] == 'PARTIAL',
-
-      // حل مشكلة الـ Null: بنحول القيمة لـ String ونعملها parse عشان نضمن النوع
       rating: num.parse((volumeInfo['averageRating'] ?? 0).toString()),
       ratingCount: int.parse((volumeInfo['ratingsCount'] ?? 0).toString()),
     );
