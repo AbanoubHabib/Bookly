@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'core/manager/navigation_cubit.dart';
 import 'core/manager/theme_cubit.dart';
 import 'core/utils/service_locator.dart';
 import 'features/home/data/repos/home_repo_impl.dart';
@@ -41,7 +42,7 @@ class Bookly extends StatelessWidget {
       providers: [
         // توفير الـ ThemeCubit على مستوى التطبيق بالكامل
         BlocProvider(create: (context) => ThemeCubit()),
-
+        BlocProvider(create: (context) => NavigationCubit()),
         BlocProvider(
           create: (context) => FeaturedBooksCubit(
             homeRepo: getIt.get<HomeRepoImpl>(),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/manager/navigation_cubit.dart';
 import '../../../../core/utils/app_router.dart';
 import '../../../../generated/assets.dart';
 
@@ -21,7 +23,8 @@ class CustomAppBar extends StatelessWidget {
           Image.asset(Assets.images.logo.path, height: 30, color: themeColor),
           IconButton(
             onPressed: () {
-              GoRouter.of(context).push(AppRouter.search);
+              //GoRouter.of(context).push(AppRouter.search);
+              context.read<NavigationCubit>().changeIndex(2);
             },
             icon: FaIcon(
               FontAwesomeIcons.magnifyingGlass,
