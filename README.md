@@ -70,7 +70,7 @@ This project follows **Clean Architecture** principles combined with the **MVVM 
 
 Watch the full walkthrough of the app and technical explanation on LinkedIn:
 
-🔗 [Watch Demo on LinkedIn](https://www.linkedin.com/posts/abanoub-habib-flutter_link_here)
+🔗 [Watch Demo on LinkedIn](https://www.linkedin.com/posts/abanoub-habib-flutter_flutter-dart-cleanarchitecture-activity-7440192145376051200-ax3_)
 
 ---
 
