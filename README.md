@@ -12,8 +12,10 @@ The app integrates with the **Google Books API** to fetch real-time data and pro
 - **Book Discovery:** Explore featured and newest books from Google Books.
 - **Advanced Search:** Find any book by title or author.
 - **Book Details:** View detailed information including descriptions, ratings, and previews.
+- Robust Error Handling:** Manage API & network errors using a centralized Failure System.
 - **Favorites System:** Save your favorite books for offline access using **Hive**.
 - **Dynamic Theming:** Seamless transition between Dark and Light modes using **HydratedBloc**.
+- **Optimized UX:** Using **Shimmer Effect** for a professional and smooth loading experience.
 - **Responsive UI:** Fully polished interface that adapts to various mobile screen sizes.
 
 ---
@@ -43,10 +45,6 @@ This project follows **Clean Architecture** principles combined with the **MVVM 
 
 ---
 
-## 📸 Screenshots
-
-
-### App Preview
 
 
 ## 📸 Screenshots
